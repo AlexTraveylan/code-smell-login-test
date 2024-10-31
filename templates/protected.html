@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Page Protégée</h1>
+<p>Bonjour {{ session['username'] }}! Cette page n'est accessible qu'aux utilisateurs connectés.</p>
+{% endblock %}

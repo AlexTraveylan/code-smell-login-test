@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Flask App</title>
+    <style>
+        .flash-messages {
+            color: red;
+            margin: 10px 0;
+        }
+
+        nav {
+            margin: 20px 0;
+        }
+
+        nav a {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="{{ url_for('home') }}">Accueil</a>
+        {% if 'username' in session %}
+        <a href="{{ url_for('protected') }}">Page Protégée</a>
+        <a href="{{ url_for('logout') }}">Déconnexion</a>
+        {% else %}
+        <a href="{{ url_for('login') }}">Connexion</a>
+        {% endif %}
+    </nav>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</body>
+
+</html>
